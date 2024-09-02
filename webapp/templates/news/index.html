@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-8">
+                {% include('messages.html') %}
+                <h4>События</h4>
+                {% for news in news_list %}
+                <h5><a href="{{ url_for('news.single_news', news_id=news.id) }}">{{ news.title }}</a></h5>
+                <picture><a href="{{ url_for('news.single_news', news_id=news.id) }}"><img src = "{{ news.picture }}" loading="lazy" height="200" width="300"></a></picture>
+                <p>{{ news.published.strftime('%d.%m.%Y') }} | Комментарии {{ news.comments_count() }}</p>
+                <hr/>
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                <h4>Прогноз погоды в Джанкое, Крым</h4>
+                {% if weather %}
+                    Погода: {{ weather.temp_C }} ℃, ощущается как: {{ weather.FeelsLikeC }} ℃
+                    <p>{{ weather.lang_ru[0]['value'] }} <img src = "{{ weather.weatherIconUrl[0]['value'] }}"></p>
+                    <p>Скорость ветра: {{ weather.windspeedKmph }} км/ч</p>
+                    <p>Влажность: {{ weather.humidity }} %</p>
+                    <p>Давление: {{ weather.pressure }}</p>
+                {% else %}
+                    Сервис погоды временно не доступен
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}
