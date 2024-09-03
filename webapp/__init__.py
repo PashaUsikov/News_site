@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
 
 from webapp.db import db
 from webapp.admin.views import blueprint as admin_blueprint
@@ -14,6 +15,7 @@ def create_app():
     app.config.from_pyfile('config.py')
     db.init_app(app)
     migrate = Migrate(app, db)
+    csrf = CSRFProtect(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)

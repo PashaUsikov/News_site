@@ -5,7 +5,7 @@
 
 Скачайте проект с githab:
 ```
-git clone https://
+git clone https://github.com/PashaUsikov/News_site.git
 ```
 
 Создайте виртуальное окружение и установите зависимости:
